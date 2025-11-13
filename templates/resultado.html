@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados - InovaCEEP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Resultados da Avaliação - InovaCEEP</h1>
+
+    {% if estatisticas|length == 0 %}
+        <p class="aviso">Nenhuma resposta registrada ainda.</p>
+    {% else %}
+        <div class="container-resultados">
+            {% for e in estatisticas %}
+                <div class="bloco-resultado">
+                    <h2>{{ e.pergunta }}</h2>
+                    <table class="tabela-resultado">
+                        <thead>
+                            <tr>
+                                <th>Opção</th>
+                                <th>Quantidade</th>
+                                <th>Percentual (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="linha-verde">
+                                <td>Excelente</td>
+                                <td>{{ e.contagem['Excelente'] }}</td>
+                                <td>{{ e.percentuais['Excelente'] }}%</td>
+                            </tr>
+                            <tr class="linha-amarela">
+                                <td>Regular</td>
+                                <td>{{ e.contagem['Regular'] }}</td>
+                                <td>{{ e.percentuais['Regular'] }}%</td>
+                            </tr>
+                            <tr class="linha-vermelha">
+                                <td>Fraca</td>
+                                <td>{{ e.contagem['Fraca'] }}</td>
+                                <td>{{ e.percentuais['Fraca'] }}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="total">Total de respostas: {{ e.total }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}" class="btn voltar">Nova Avaliação</a>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliação InovaCEEP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function selecionar(pergunta, valor) {
+            document.getElementById(pergunta).value = valor;
+
+            // Resetar estilo de todos os botões da pergunta
+            const botoes = document.querySelectorAll(`[data-grupo='${pergunta}']`);
+            botoes.forEach(b => b.classList.remove('ativo'));
+
+            // Ativar o botão clicado
+            const botaoSelecionado = document.querySelector(`[data-grupo='${pergunta}'][data-valor='${valor}']`);
+            if (botaoSelecionado) botaoSelecionado.classList.add('ativo');
+        }
+    </script>
+</head>
+<body>
+    <h1>Avaliação da Feira InovaCEEP</h1>
+
+    <form method="POST" action="{{ url_for('salvar') }}">
+        {% for pergunta in perguntas %}
+            <div class="pergunta">
+                <h3>{{ pergunta }}</h3>
+                <input type="hidden" id="{{ pergunta }}" name="{{ pergunta }}" required>
+
+                <div class="botoes">
+                    <button type="button" class="btn verde" data-grupo="{{ pergunta }}" data-valor="Excelente" onclick="selecionar('{{ pergunta }}', 'Excelente')">Excelente</button>
+                    <button type="button" class="btn amarelo" data-grupo="{{ pergunta }}" data-valor="Regular" onclick="selecionar('{{ pergunta }}', 'Regular')">Regular</button>
+                    <button type="button" class="btn vermelho" data-grupo="{{ pergunta }}" data-valor="Fraca" onclick="selecionar('{{ pergunta }}', 'Fraca')">Fraca</button>
+                </div>
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn enviar">Enviar Avaliação</button>
+    </form>
+</body>
+</html>
