@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Resultados da Avaliação - InovaCEEP</h1>
+    <!-- CABEÇALHO UNIFICADO -->
+    <header class="header centralizado">
+        <img src="{{ url_for('static', filename='ceep.png') }}" class="logo-esquerda">
+        <h1>Resultados da Avaliação</h1>
+        <img src="{{ url_for('static', filename='inovaceep.png') }}" class="logo-direita">
+    </header>
 
     {% if estatisticas|length == 0 %}
         <p class="aviso">Nenhuma resposta registrada ainda.</p>

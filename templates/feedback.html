@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedbacks - InovaCEEP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="header-container">
+    <div class="header-content">
+        <img src="{{ url_for('static', filename='ceep.png') }}" class="logo-esquerda">
+        <h1>Feedbacks Gerais dos Visitantes</h1>
+        <img src="{{ url_for('static', filename='inovaceep.png') }}" class="logo-direita">
+    </div>
+</header>
+
+<div class="container-resultados">
+    {% if feedbacks|length == 0 %}
+        <p class="aviso">Nenhum feedback enviado ainda.</p>
+    {% else %}
+        {% for texto in feedbacks %}
+            <div class="bloco-resultado card-alinhado">
+                <p>{{ texto }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<a href="{{ url_for('index') }}" class="btn voltar">Voltar</a>
+
+</body>
+</html>

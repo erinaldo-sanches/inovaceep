@@ -19,7 +19,13 @@
     </script>
 </head>
 <body>
-    <h1>Avaliação da Feira InovaCEEP</h1>
+    <header class="header-container">
+    <div class="header-content">
+        <img src="{{ url_for('static', filename='ceep.png') }}" class="logo-esquerda">
+        <h1>Avaliação da Feira InovaCEEP</h1>
+        <img src="{{ url_for('static', filename='inovaceep.png') }}" class="logo-direita">
+    </div>
+    </header>
 
     <form method="POST" action="{{ url_for('salvar') }}">
         {% for pergunta in perguntas %}
@@ -34,6 +40,11 @@
                 </div>
             </div>
         {% endfor %}
+
+        <div class="pergunta">
+            <h3>Sua visão geral sobre a feira InovaCEEP e sugestões:</h3>
+            <textarea name="feedback_texto" required placeholder="Escreva seu feedback aqui..." class="caixa-feedback"></textarea>
+        </div>
 
         <button type="submit" class="btn enviar">Enviar Avaliação</button>
     </form>

@@ -5,6 +5,7 @@ from collections import Counter, defaultdict
 app = Flask(__name__)
 
 CSV_FILE = 'dados.csv'
+FEEDBACK_FILE = "feedback.csv"
 
 # Perguntas fixas do questionário
 PERGUNTAS = [
@@ -21,9 +22,15 @@ def index():
 @app.route('/salvar', methods=['POST'])
 def salvar():
     respostas = [request.form.get(p) for p in PERGUNTAS]
+    feedback_texto = request.form.get("feedback_texto")
     with open(CSV_FILE, 'a', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(respostas)
+
+    with open(FEEDBACK_FILE, "a", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow([feedback_texto])
+
     return redirect(url_for('resultado'))
 
 @app.route('/resultado')
@@ -51,6 +58,17 @@ def resultado():
         })
 
     return render_template('resultado.html', estatisticas=estatisticas)
+
+# ROTA DO ADMINISTRADOR → NÃO REFERENCIADA EM NENHUM BOTÃO
+@app.route("/feedback")
+def feedback():
+    try:
+        with open(FEEDBACK_FILE, newline="", encoding="utf-8") as f:
+            linhas = [linha[0] for linha in csv.reader(f)]
+    except FileNotFoundError:
+        linhas = []
+
+    return render_template("feedback.html", feedbacks=linhas)
 
 if __name__ == '__main__':
     app.run(debug=True)

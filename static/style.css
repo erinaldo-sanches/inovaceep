@@ -9,6 +9,54 @@ h1 {
     color: #0A1C30;
 }
 
+/* ====================================
+   CABEÇALHO ALINHADO COM OS CARDS
+   ==================================== */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    flex: 1;
+    text-align: center;
+    color: #0A1C30;
+    margin: 0;
+    font-size: 28px;
+}
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;     /* centraliza tudo na tela */
+    margin-bottom: 25px;
+}
+
+.header-content {
+    width: 60%;                  /* EXATAMENTE a mesma largura dos cards */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content h1 {
+    text-align: center;
+    flex: 1;
+    color: #0A1C30;
+}
+
+.logo-esquerda,
+.logo-direita {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+}
+
 .pergunta {
     margin: 25px auto;
     background: white;
@@ -21,6 +69,16 @@ h1 {
 .pergunta h3 {
     color: #0A1C30;
     margin-bottom: 15px;
+}
+
+.caixa-feedback {
+    width: 100%;
+    height: 130px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    resize: vertical;
 }
 
 .botoes {
@@ -147,4 +205,38 @@ h1 {
 .btn.voltar:hover {
     background: #122b4a;
     transform: scale(1.05);
+}
+
+.centralizado {
+    width: 60%;               /* mesma largura dos cards */
+    margin: 0 auto;           /* centraliza */
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* torna os cards também garantidamente alinhados */
+.card-alinhado {
+    width: 100%;              /* acompanha a largura do container */
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo-esquerda,
+    .logo-direita {
+        height: 60px;
+    }
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .centralizado {
+        width: 90%;
+    }
+
 }
