@@ -62,9 +62,12 @@ def resultado():
 # ROTA DO ADMINISTRADOR → NÃO REFERENCIADA EM NENHUM BOTÃO
 @app.route("/feedback")
 def feedback():
+    linhas = []
     try:
         with open(FEEDBACK_FILE, newline="", encoding="utf-8") as f:
-            linhas = [linha[0] for linha in csv.reader(f)]
+            for linha in csv.reader(f):
+                if linha and linha[0].strip():  # ignora linhas vazias
+                    linhas.append(linha[0])
     except FileNotFoundError:
         linhas = []
 
